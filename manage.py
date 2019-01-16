@@ -1,27 +1,14 @@
-from flask import Flask,session
-
-from flask_session import Session
-
-from redis import StrictRedis
-
-from flask_sqlalchemy import SQLAlchemy
+from flask import session
 
 from flask_script import Manager
 
 from flask_migrate import Migrate,MigrateCommand
 
-from config import Config
+from info import create_app,db
 
-app=Flask(__name__)
-
-
-app.config.from_object(Config)
-
-Session(app)
+app=create_app('development')
 
 manage=Manager(app)
-
-db=SQLAlchemy(app)
 
 Migrate(app,db)
 
